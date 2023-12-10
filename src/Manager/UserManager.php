@@ -21,4 +21,27 @@ class UserManager
 
         return $user;
     }
+
+
+
+    public function clearEntityManager(): void
+    {
+        $this->entityManager->clear();
+    }
+
+    public function findUser(int $id): ?User
+    {
+        $repository = $this->entityManager->getRepository(User::class);
+        $user = $repository->find($id);
+
+        return $user instanceof User ? $user : null;
+    }
+
+
+
+    public function subscribeUser(User $author, User $follower): void
+    {
+        $author->addFollower($follower);
+        $this->entityManager->flush();
+    }
 }

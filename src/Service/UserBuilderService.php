@@ -13,9 +13,12 @@ class UserBuilderService
     ) {
     }
 
+
     /**
+     * @param string $login
      * @param string[] $texts
-     */
+     * @return User
+    */
     public function createUserWithTweets(string $login, array $texts): User
     {
         $user = $this->userManager->create($login);
@@ -24,5 +27,19 @@ class UserBuilderService
         }
 
         return $user;
+    }
+
+
+
+    /**
+     * @return User[]
+     */
+    public function createUserWithFollower(string $login, string $followerLogin): array
+    {
+        $user = $this->userManager->create($login);
+        $follower = $this->userManager->create($followerLogin);
+        $this->userManager->subscribeUser($user, $follower);
+
+        return [$user, $follower];
     }
 }
