@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Created by PhpStorm at 10.12.2023
  *
- * @WorldController
+ * Class WorldController
  *
  * @author Jean-Claude <jeanyao@ymail.com>
  *
