@@ -8,9 +8,11 @@ $ composer create-project symfony/skeleton symfony-course-2023-11 "6.3.*"
 
 2. Docker
 ```
+$ docker rm container_hash
 $ docker compose up -d --build
 $ docker compose up -d
 $ docker compose ps
+$ docker compose stop
 ```
 
 3. PSR12 (https://www.php-fig.org/psr/psr-12/)
