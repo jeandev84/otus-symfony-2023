@@ -2,6 +2,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Manager\SubscriptionManager;
 use App\Manager\TweetManager;
 use App\Manager\UserManager;
 
@@ -10,6 +11,7 @@ class UserBuilderService
     public function __construct(
         private readonly TweetManager $tweetManager,
         private readonly UserManager $userManager,
+        private readonly SubscriptionManager $subscriptionManager,
     ) {
     }
 
@@ -39,6 +41,7 @@ class UserBuilderService
         $user = $this->userManager->create($login);
         $follower = $this->userManager->create($followerLogin);
         $this->userManager->subscribeUser($user, $follower);
+        $this->subscriptionManager->addSubscription($user, $follower);
 
         return [$user, $follower];
     }
