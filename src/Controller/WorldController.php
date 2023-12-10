@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 
+use App\Manager\UserManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -15,10 +17,23 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package App\Controller
  */
-class WorldController
+class WorldController extends AbstractController
 {
+
+       protected UserManager $userManager;
+
+
+       public function __construct(UserManager $userManager)
+       {
+           $this->userManager = $userManager;
+       }
+
+
+
        public function hello(): Response
        {
-           return new Response('<html><body><h1><b>Hello,</b> <i>world</i>!!!!</h1></body></html>');
+           $user = $this->userManager->create('My user');
+
+           return $this->json($user->toArray());
        }
 }
